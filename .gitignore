@@ -1,0 +1,49 @@
+# Dependencias
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Next.js: caché de compilación y resultado de la exportación estática. Los dos
+# se regeneran; a Pages va lo que compila el CI, no lo que hay aquí.
+/.next/
+/out/
+/build
+/coverage
+
+# Configuración local de Claude Code: cada máquina tiene la suya.
+.claude/
+
+# Ajustes personales de editores.
+.vscode/
+.idea/
+
+# Basura del explorador y de Finder que aparece sola junto a las fotos.
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# El repositorio es público: las variables de entorno no salen de aquí.
+.env*
+*.pem
+
+# Registros de gestores de paquetes
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Artefactos de TypeScript: caché y fichero que Next genera en cada compilación.
+*.tsbuildinfo
+next-env.d.ts
+
+# Vercel
+.vercel
+
+# _photos/ y public/photos/ NO se ignoran. El CI no convierte fotos, así que
+# public/photos/ es lo que realmente se publica; y sin los JPEG originales de
+# _photos/ no habría con qué volver a ejecutar scripts/optimize-photos.mjs.

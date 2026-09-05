@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+/*
+ * Tokens de color y tipografía. Valores y razones en ../../DESIGN.md, §3–§4.
+ * La paleta sale de la carta impresa del mesón: papel crema, tinta oscura,
+ * los círculos rojo ladrillo y verde oliva de los alérgenos, el latón de las
+ * estrellas. Prohibido escribir hex sueltos en los componentes.
+ *
+ * No hay modo oscuro a propósito: el sitio describe un local concreto y una
+ * segunda paleta describiría otro que no existe.
+ */
+:root {
+  --background: #f6f1e7;
+  --foreground: #2a211b;
+  --primary: #7c2d1e;
+  --on-primary: #f6f1e7;
+  --accent: #4f5d2f;
+  --star: #a6741f;
+  /* Sólo relleno decorativo: filetes, fondos de sello. Nunca texto. */
+  --clay: #c67b5c;
+  --card: #ffffff;
+  --muted: #eee6d8;
+  --muted-foreground: #5f554a;
+  --border: #dfd4c2;
+  --surface-dark: #2b1d17;
+  --on-dark: #f1e9dc;
+  --on-dark-muted: #c9bca9;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-accent: var(--accent);
+  --color-star: var(--star);
+  --color-clay: var(--clay);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-surface-dark: var(--surface-dark);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-muted: var(--on-dark-muted);
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-karla), Karla, system-ui, -apple-system, sans-serif;
+
+  --radius-sharp: 2px;
+  --radius-soft: 4px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* §5: foco visible en todo lo interactivo, 2px. */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sharp);
+}
+
+/*
+ * §5: cursor de mano en todo lo clicable, definido una sola vez. El preflight
+ * de Tailwind v4 ya no restablece el cursor de <button>, así que sin esta regla
+ * un botón sale con la flecha del navegador. Capa base para que cursor-* mande.
+ */
+@layer base {
+  :where(a[href], button, [role="button"], [role="tab"]):not(
+      :disabled,
+      [aria-disabled="true"]
+    ) {
+    cursor: pointer;
+  }
+}
+
+/* §4: la columna de precios no debe bailar al cambiar las cifras. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+ * Cita de la carta impresa: la línea de puntos entre el plato y el precio.
+ * Se dibuja con un fondo repetido en el elemento flexible del medio, para que
+ * llegue siempre al precio sin depender de la longitud del nombre.
+ */
+.leaders {
+  flex: 1 1 auto;
+  min-width: 1.5rem;
+  height: 1em;
+  margin: 0 0.4rem;
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1.2px);
+  background-size: 6px 6px;
+  background-position: 0 0.55em;
+  background-repeat: repeat-x;
+  align-self: flex-end;
+  transform: translateY(-0.35em);
+}
+
+/* Filete decorativo bajo los antetítulos: rojo ladrillo con dos puntos oliva. */
+.rule {
+  height: 3px;
+  width: 6rem;
+  background:
+    radial-gradient(circle at 3px 50%, var(--accent) 2px, transparent 2.5px),
+    radial-gradient(circle at calc(100% - 3px) 50%, var(--accent) 2px, transparent 2.5px),
+    linear-gradient(var(--clay), var(--clay)) center / calc(100% - 20px) 1px no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* La cabecera fija no debe tapar el título al que se salta por ancla. */
+[id] {
+  scroll-margin-top: 5.5rem;
+}
