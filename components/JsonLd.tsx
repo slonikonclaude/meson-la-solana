@@ -1,6 +1,7 @@
 import { restaurant, weekDays } from "@/lib/restaurant";
 import { menu, dishCount } from "@/lib/menu";
 import { getDictionary, type Locale } from "@/lib/dictionaries";
+import { metadataBase, ogImagePath } from "@/lib/site";
 
 const dayName = {
   1: "Monday",
@@ -31,9 +32,20 @@ export function JsonLd({ locale }: { locale: Locale }) {
     })),
   );
 
+  /*
+   * url e image absolutas, resueltas sobre metadataBase: heredan el origen y
+   * el subdirectorio de Pages igual que canonical y og:image (lib/site.ts).
+   * Google las lista como recomendadas para Restaurant.
+   */
+  const pageUrl = new URL(locale === "es" ? "./" : "./en/", metadataBase).toString();
+  const imageUrl = new URL(`.${ogImagePath}`, metadataBase).toString();
+
   const data = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
+    "@id": pageUrl,
+    url: pageUrl,
+    image: [imageUrl],
     name: restaurant.name,
     description: dict.meta.description,
     servesCuisine: locale === "es" ? ["Española", "Tapas"] : ["Spanish", "Tapas"],

@@ -61,4 +61,17 @@ for (const name of NAMES) {
   manifest.push({ name, width: meta.width, height: meta.height });
   console.log(`${name}: ${meta.width}x${meta.height}`);
 }
+
+/*
+ * og:image en JPEG: la fachada a 1600 px, para los scrapers de previsualización
+ * que no leen WebP. La ruta está fijada en lib/site.ts (ogImagePath).
+ */
+const og = await sharp(await readFile(join(SRC, "fachada.jpg")))
+  .rotate()
+  .resize({ width: 1600, withoutEnlargement: true })
+  .jpeg({ quality: 82, mozjpeg: true })
+  .toBuffer();
+await writeFile(join(OUT, "fachada-og.jpg"), og);
+console.log("fachada-og.jpg");
+
 console.log(JSON.stringify(manifest));

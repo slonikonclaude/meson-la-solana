@@ -16,7 +16,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 const picks: { dish: string; photo: Photo; topic?: string; popular?: boolean }[] = [
   { dish: "Pulpo a la gallega", photo: photos.pulpo, topic: "pulpo" },
   { dish: "Chipirones en su tinta", photo: photos.chipironesTinta, topic: "chipirones" },
-  { dish: "Croqueta de bacalao", photo: photos.croquetas, topic: "croquetas" },
+  { dish: "Croquetas de bacalao", photo: photos.croquetas, topic: "croquetas" },
   { dish: "Chuletón", photo: photos.chuleton, topic: "chuletón" },
   { dish: "Solomillo de ternera", photo: photos.solomilloTernera, popular: true },
   { dish: "Calamares", photo: photos.calamares, popular: true },
@@ -39,7 +39,7 @@ export function Specialities({ dict, locale }: { dict: Dictionary; locale: Local
             const copy = dict.specialities.items[i];
             const dish = findDish(pick.dish);
             const mentions = pick.topic
-              ? reviewTopics.find((t) => t.word === pick.topic)?.count
+              ? reviewTopics.find((t) => t.key === pick.topic)?.count
               : undefined;
             return (
               <RevealItem

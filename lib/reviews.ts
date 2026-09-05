@@ -131,14 +131,20 @@ export const ratingBreakdown: { stars: 5 | 4 | 3 | 2 | 1; count: number }[] = [
   { stars: 1, count: 9 },
 ];
 
-/** Palabras que Google destaca sobre las reseñas, con el número de menciones. */
-export const reviewTopics: { word: string; count: number }[] = [
-  { word: "tapas", count: 22 },
-  { word: "cena", count: 10 },
-  { word: "croquetas", count: 9 },
-  { word: "pulpo", count: 8 },
-  { word: "vinos", count: 7 },
-  { word: "chuletón", count: 6 },
-  { word: "chipirones", count: 5 },
-  { word: "bravas", count: 5 },
+/**
+ * Palabras que Google destaca sobre las reseñas, con el número de menciones.
+ * `key` es la palabra tal cual la muestra Google (en español) y sirve de
+ * clave de búsqueda; `label` es lo que se imprime en cada idioma.
+ */
+export type ReviewTopic = { key: string; label: { es: string; en: string }; count: number };
+
+export const reviewTopics: ReviewTopic[] = [
+  { key: "tapas", label: { es: "tapas", en: "tapas" }, count: 22 },
+  { key: "cena", label: { es: "cena", en: "dinner" }, count: 10 },
+  { key: "croquetas", label: { es: "croquetas", en: "croquettes" }, count: 9 },
+  { key: "pulpo", label: { es: "pulpo", en: "octopus" }, count: 8 },
+  { key: "vinos", label: { es: "vinos", en: "wine" }, count: 7 },
+  { key: "chuletón", label: { es: "chuletón", en: "rib steak" }, count: 6 },
+  { key: "chipirones", label: { es: "chipirones", en: "baby squid" }, count: 5 },
+  { key: "bravas", label: { es: "bravas", en: "patatas bravas" }, count: 5 },
 ];

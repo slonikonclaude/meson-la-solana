@@ -49,7 +49,6 @@ export function Menu({ dict, locale }: { dict: Dictionary; locale: Locale }) {
     tabRefs.current[next]?.focus();
   };
 
-  const section = menu[active];
   const carta = photos.carta;
 
   return (
@@ -102,36 +101,52 @@ export function Menu({ dict, locale }: { dict: Dictionary; locale: Locale }) {
         </Reveal>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_300px] lg:gap-10">
-          <div
-            role="tabpanel"
-            id={`panel-${section.id}`}
-            aria-labelledby={`tab-${section.id}`}
-            tabIndex={0}
-            className="rounded-[var(--radius-soft)] border border-border bg-card p-5 sm:p-7"
-          >
-            <h3 className="font-display text-3xl font-semibold text-foreground">{section.title[locale]}</h3>
-            {/*
-              Dos columnas desde md, como la carta impresa. La regla va en cada
-              fila y no con divide-y: en dos columnas divide-y trazaría la línea
-              entre columnas y no bajo el plato.
-            */}
-            <ul className="mt-5 md:grid md:grid-cols-2 md:gap-x-10">
-              {section.dishes.map((dish) => (
-                <li key={dish.name} className="border-b border-border py-3">
-                  <div className="flex items-baseline">
-                    <span className="text-[0.9375rem] font-medium text-foreground">{dish.name}</span>
-                    <span className="leaders" aria-hidden />
-                    <PriceCell dish={dish} locale={locale} dict={dict} />
-                  </div>
-                  {dish.note?.[locale] ? (
-                    <p className="mt-0.5 text-sm leading-snug text-muted-foreground">
-                      {dish.note[locale]}
-                    </p>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{dict.menu.allergenNote}</p>
+          {/*
+            Los seis paneles se renderizan siempre y se ocultan con `hidden`, no
+            se monta sólo el activo: así cada aria-controls de la tira de
+            pestañas apunta a un id que existe (patrón APG de pestañas) y los
+            79 platos van completos en el HTML exportado, no sólo las tapas.
+          */}
+          <div>
+            {menu.map((section, i) => (
+              <div
+                key={section.id}
+                role="tabpanel"
+                id={`panel-${section.id}`}
+                aria-labelledby={`tab-${section.id}`}
+                tabIndex={0}
+                hidden={i !== active}
+                className="rounded-[var(--radius-soft)] border border-border bg-card p-5 sm:p-7"
+              >
+                <h3 className="font-display text-3xl font-semibold text-foreground">
+                  {section.title[locale]}
+                </h3>
+                {/*
+                  Dos columnas desde md, como la carta impresa. La regla va en
+                  cada fila y no con divide-y: en dos columnas divide-y trazaría
+                  la línea entre columnas y no bajo el plato.
+                */}
+                <ul className="mt-5 md:grid md:grid-cols-2 md:gap-x-10">
+                  {section.dishes.map((dish) => (
+                    <li key={dish.name} className="border-b border-border py-3">
+                      <div className="flex items-baseline">
+                        <span className="text-[0.9375rem] font-medium text-foreground">{dish.name}</span>
+                        <span className="leaders" aria-hidden />
+                        <PriceCell dish={dish} locale={locale} dict={dict} />
+                      </div>
+                      {dish.note?.[locale] ? (
+                        <p className="mt-0.5 text-sm leading-snug text-muted-foreground">
+                          {dish.note[locale]}
+                        </p>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                  {dict.menu.allergenNote}
+                </p>
+              </div>
+            ))}
           </div>
 
           <figure className="hidden lg:block">

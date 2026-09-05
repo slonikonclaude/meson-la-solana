@@ -18,6 +18,15 @@ export const siteOrigin = rawOrigin.replace(/\/+$/, "");
  */
 export const metadataBase = new URL(`${siteOrigin}${basePath}/`);
 
+/**
+ * Imagen para previsualizaciones de enlaces: copia JPEG de la fachada, porque
+ * algunos scrapers (LinkedIn entre ellos) no aceptan WebP en og:image. La
+ * genera scripts/optimize-photos.mjs junto a los WebP. Ruta relativa a la
+ * raíz del sitio, sin basePath: metadataBase ya lo lleva.
+ */
+export const ogImagePath = "/photos/fachada-og.jpg";
+export const ogImageSize = { width: 1600, height: 1200 };
+
 /** El español es la raíz; el inglés vive en /en/. No hay redirección. */
 export const languageAlternates = {
   "es-ES": "/",
@@ -48,9 +57,9 @@ export function buildMetadata(locale: Locale): Metadata {
       images: [
         {
           // Relativa a propósito: metadataBase ya lleva el subdirectorio.
-          url: "/photos/fachada-1600.webp",
-          width: 1600,
-          height: 1200,
+          url: ogImagePath,
+          width: ogImageSize.width,
+          height: ogImageSize.height,
           alt: dict.meta.title,
         },
       ],

@@ -72,10 +72,10 @@ export function Reviews({ dict, locale }: { dict: Dictionary; locale: Locale }) 
               <ul className="mt-3 flex flex-wrap gap-2">
                 {reviewTopics.map((t) => (
                   <li
-                    key={t.word}
+                    key={t.key}
                     className="inline-flex items-center gap-1.5 rounded-[var(--radius-sharp)] border border-border bg-background px-2.5 py-1 text-sm text-foreground"
                   >
-                    {t.word}
+                    {t.label[locale]}
                     <span className="text-xs text-muted-foreground tabular">{t.count}</span>
                     <span className="sr-only">{dict.reviews.mentionsSuffix}</span>
                   </li>

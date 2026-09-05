@@ -9,7 +9,13 @@
  *
  * Los precios no se inventan: Lenguado lleva «S. mercado» en la carta y
  * Cecina tiene la cifra corregida a mano e ilegible en la foto — ambos van
- * con `priceNote` en lugar de número.
+ * con `priceNote` en lugar de número. Otras tres cifras están retocadas a
+ * mano en la carta pero se leen sin duda: Montaditos de ahumados 16,00,
+ * Sepia 12,00 y Chuletas de cordero 17,50.
+ *
+ * Los nombres se copian tal cual están impresos, en plural donde la carta
+ * los pone en plural aunque el precio sea por unidad («Croquetas de bacalao
+ * 1 … 1,70»).
  */
 
 export type Dish = {
@@ -61,8 +67,8 @@ export const menu: MenuSection[] = [
       { name: "Montadito de morcilla", note: { en: "Black pudding mini sandwich" }, price: 2 },
       { name: "Tellinas", note: { en: "Wedge clams" }, price: 12 },
       { name: "Albóndigas", note: { en: "Meatballs" }, price: 7.5 },
-      { name: "Croqueta de bacalao", note: { es: "1 ud.", en: "Cod croquette, each" }, price: 1.7 },
-      { name: "Croqueta de pollo y jamón", note: { es: "1 ud.", en: "Chicken and ham croquette, each" }, price: 1.7 },
+      { name: "Croquetas de bacalao", note: { es: "1 ud.", en: "Cod croquette, each" }, price: 1.7 },
+      { name: "Croquetas de pollo y jamón", note: { es: "1 ud.", en: "Chicken and ham croquette, each" }, price: 1.7 },
       { name: "Mojama", note: { en: "Salt-cured tuna" }, price: 11 },
       { name: "Boquerones en vinagre", note: { en: "Anchovies in vinegar" }, price: 6.5 },
       { name: "Solomillo trinchado", note: { en: "Sliced pork tenderloin" }, price: 9.5 },
@@ -71,7 +77,7 @@ export const menu: MenuSection[] = [
       { name: "Ventresca con tomate", note: { en: "Tuna belly with tomato" }, price: 10.9 },
       { name: "Chipirones en su tinta", note: { en: "Baby squid in their ink" }, price: 9.9 },
       { name: "Morcilla de Baza", note: { en: "Black pudding from Baza" }, price: 6.5 },
-      { name: "Pimiento relleno", note: { es: "1 ud.", en: "Stuffed pepper, each" }, price: 3 },
+      { name: "Pimientos rellenos", note: { es: "1 ud.", en: "Stuffed pepper, each" }, price: 3 },
       { name: "Pimientos de padrón", note: { en: "Padrón peppers" }, price: 5 },
       { name: "Zamburiñas", note: { en: "Queen scallops, each" }, price: 2.9, perUnit: true },
       { name: "Puntilla", note: { en: "Tiny fried squid" }, price: 8.5 },
@@ -123,8 +129,8 @@ export const menu: MenuSection[] = [
     title: { es: "Salsas", en: "Sauces" },
     dishes: [
       {
-        name: "Roquefort, pimienta, foie o almendra",
-        note: { en: "Roquefort, pepper, foie or almond sauce for your steak" },
+        name: "Roquefort, pimienta, foie, almendra",
+        note: { es: "Salsa a elegir para la carne", en: "Roquefort, pepper, foie or almond sauce for your steak" },
         price: 2.5,
       },
     ],

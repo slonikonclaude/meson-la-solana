@@ -87,7 +87,8 @@ node scripts/optimize-photos.mjs
 ```
 
 Lee `_photos/<nombre>.jpg` según la lista `NAMES` del script y escribe `public/photos/<nombre>-800.webp`
-y `-1600.webp` (calidad 78). Imprime el tamaño original de cada foto, que es el que va en `lib/photos.ts`.
+y `-1600.webp` (calidad 78), más `public/photos/fachada-og.jpg`, la imagen de previsualización de enlaces
+en JPEG. Imprime el tamaño original de cada foto, que es el que va en `lib/photos.ts`.
 
 ## Publicación
 
